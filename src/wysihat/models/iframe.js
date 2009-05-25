@@ -100,6 +100,37 @@ WysiHat.iFrame.Methods = {
 
     return this;
   },
+  
+  /**
+   *  WysiHat.iFrame.Methods#linkStyleSheet(href) -> Element
+   *  - href (String): The path to an external CSS style sheet
+   *
+   *  Links an external CSS style sheet to iframe document.
+  **/
+  
+  linkStyleSheet: function(href) { 
+    this.whenReady(function(editor){
+      var document = editor.getDocument();
+      if(document.createStyleSheet) { // IE
+        document.createStyleSheet(css);
+      } else {
+        var head = document.documentElement.getElementsByTagName('head')[0];
+        if (!head) {
+          head=document.createElement('head');
+          document.documentElement.insertBefore(head,document.getElementsByTagName('body')[0]);
+        }
+        var link='<link href="'+href+'" media="screen" rel="stylesheet" type="text/css"/>';
+        head=$(head);
+        if (head.insert) { // Safari
+          $(head).insert(link);          
+        } else { // everyone else
+          head.innerHTML=head.innerHTML+link;
+        }
+      }
+    });
+  },
+  
+  
 
   rawContent: function() {
     var document = this.getDocument();
