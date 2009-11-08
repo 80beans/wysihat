@@ -152,6 +152,17 @@ WysiHat.iFrame.Methods = {
     return Element.getStyle(document.body, style);
   },
 
+  /**
+   *  WysiHat.iFrame.Methods#getStyle(style) -> string
+   *  - style specificication (i.e. backgroundColor)
+   *
+   *  Returns the style from the element based on the given style
+   */
+  getStyle: function(style) {
+    var document = this.getDocument();
+    return Element.getStyle(document.body, style);
+  },
+
   rawContent: function() {
     var document = this.getDocument();
 
